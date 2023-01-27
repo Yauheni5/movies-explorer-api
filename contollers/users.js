@@ -16,23 +16,18 @@ const User = require('../models/User');
 
 module.exports.createUser = async (req, res, next) => {
   try {
-    const {
-      email, password, name, about, avatar,
-    } = req.body;
+    const { email, password, name } = req.body;
     const hash = await bcrypt.hash(password, 10);
     const user = await User.create({
       email,
       password: hash,
       name,
-      about,
-      avatar,
     });
     return res.status(statusCode.Created).send({
       data: {
         email: user.email,
         name: user.name,
         about: user.about,
-        avatar: user.avatar,
       },
     });
   } catch (err) {
@@ -68,55 +63,13 @@ module.exports.getUserInfo = async (req, res, next) => {
   }
 };
 
-module.exports.findUser = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.params._id);
-    if (!user) {
-      return next(new NotFoundError());
-    }
-    return res.status(statusCode.OK).send({ data: user });
-  } catch (err) {
-    if (err.name === 'CastError') {
-      return next(new BadRequestError());
-    }
-    return next(new InternalServerError());
-  }
-};
-
-module.exports.getUsers = async (req, res, next) => {
-  try {
-    const user = await User.find({});
-    return res.status(statusCode.OK).send({ data: user });
-  } catch (err) {
-    return next(new InternalServerError());
-  }
-};
-
 module.exports.updateProfile = async (req, res, next) => {
   try {
     const userID = req.user._id;
-    const { name, about } = req.body;
+    const { email, name } = req.body;
     const user = await User.findByIdAndUpdate(
       userID,
-      { name, about },
-      { new: true, runValidators: true },
-    );
-    if (!user) {
-      return next(new NotFoundError());
-    }
-    return res.status(statusCode.OK).send({ data: user });
-  } catch (err) {
-    return next(new InternalServerError());
-  }
-};
-
-module.exports.updateAvatar = async (req, res, next) => {
-  try {
-    const userID = req.user._id;
-    const { avatar } = req.body;
-    const user = await User.findByIdAndUpdate(
-      userID,
-      { avatar },
+      { email, name },
       { new: true, runValidators: true },
     );
     if (!user) {

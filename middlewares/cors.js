@@ -1,6 +1,4 @@
 const allowedCors = [
-  'http://yauheni.nomoredomains.club',
-  'https://yauheni.nomoredomains.club',
   'http://localhost:3001',
   'https://localhost:3001',
   'http://localhost:3000',
