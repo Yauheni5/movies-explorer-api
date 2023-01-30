@@ -6,13 +6,14 @@ const {
   getUserInfo,
 } = require('../contollers/users');
 
+const validationUser = {
+  name: Joi.string().min(2).max(30),
+  email: Joi.string(),
+};
 usersRoutes.get('/me', getUserInfo);
 
 usersRoutes.patch('/me', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    email: Joi.string(),
-  }),
+  body: Joi.object().keys(validationUser),
 }), updateProfile);
 
 module.exports = usersRoutes;
