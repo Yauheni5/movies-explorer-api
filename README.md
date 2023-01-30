@@ -4,6 +4,8 @@ backend for movies explorer
 
 # публичный сервер
 
+api.diploma-yauheni.nomoredomainsclub.ru
+
 # возвращает информацию о пользователе (email и имя)
 
 GET /users/me
