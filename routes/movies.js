@@ -18,7 +18,7 @@ const validationMovies = {
   trailerLink: Joi.string().required().pattern(urlRegex),
   thumbnail: Joi.string().required().pattern(urlRegex),
   movieId: Joi.number().required(),
-  nameRU: Joi.string.required(),
+  nameRU: Joi.string().required(),
   nameEN: Joi.string().required(),
   link: Joi.string().required().pattern(urlRegex),
 };
