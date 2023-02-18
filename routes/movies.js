@@ -9,17 +9,17 @@ const {
 } = require('../contollers/movies');
 
 const validationMovies = {
-  country: Joi.string().min(2).max(30).required(),
-  director: Joi.string().min(2).max(30).required(),
-  duration: Joi.number().min(1).max(30).required(),
-  year: Joi.string().min(2).max(10).required(),
-  description: Joi.number().min(2).max(100).required(),
+  country: Joi.string().required(),
+  director: Joi.string().required(),
+  duration: Joi.number().required(),
+  year: Joi.string().required(),
+  description: Joi.number().required(),
   image: Joi.string().required().pattern(urlRegex),
   trailerLink: Joi.string().required().pattern(urlRegex),
   thumbnail: Joi.string().required().pattern(urlRegex),
-  movieId: Joi.number().min(1).max(30).required(),
-  nameRU: Joi.string().min(1).max(50).required(),
-  nameEN: Joi.string().min(1).max(50).required(),
+  movieId: Joi.number().required(),
+  nameRU: Joi.string.required(),
+  nameEN: Joi.string().required(),
   link: Joi.string().required().pattern(urlRegex),
 };
 
