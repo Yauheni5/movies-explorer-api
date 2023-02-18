@@ -20,7 +20,6 @@ const validationMovies = {
   movieId: Joi.number().required(),
   nameRU: Joi.string().required(),
   nameEN: Joi.string().required(),
-  link: Joi.string().required().pattern(urlRegex),
 };
 
 moviesRoutes.get('/', getMovies);
