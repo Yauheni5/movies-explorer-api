@@ -55,7 +55,7 @@ module.exports.deleteMovie = async (req, res, next) => {
           return next(new NotFoundError());
         }
         if (movieDeleting.owner.toString() === userId) {
-          return res.status(statusCode.OK).send({ message: `Фильм ${movieDeleting.name} удален` });
+          return res.status(statusCode.OK).send({ message: `Фильм ${movieDeleting.nameRU} удален` });
         }
         return next(new ForbiddenError());
       });
