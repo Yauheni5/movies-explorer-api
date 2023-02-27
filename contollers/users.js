@@ -59,6 +59,11 @@ module.exports.getUserInfo = async (req, res, next) => {
     }
     return res.status(statusCode.OK).send({ data: user });
   } catch (err) {
+    if (err.code === 11000) {
+      return next(new ConflictError('Пользователь с таким email уже зарегистрирован'));
+    } if (err.name === 'ValidationError') {
+      return next(new BadRequestError());
+    }
     return next(new InternalServerError());
   }
 };
